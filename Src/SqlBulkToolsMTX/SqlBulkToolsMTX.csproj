@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461;net472;netcoreapp2.2;</TargetFrameworks>
+	<RuntimeFrameworkVersion>2.2.6</RuntimeFrameworkVersion>	
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>		  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+  </ItemGroup>
+
+</Project>

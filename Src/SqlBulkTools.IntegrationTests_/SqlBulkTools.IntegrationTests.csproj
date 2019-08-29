@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SqlBulkTools.IntegrationTests</RootNamespace>
     <AssemblyName>SqlBulkTools.IntegrationTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,9 +79,9 @@
     <Compile Include="TestContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SqlBulkTools\SqlBulkTools.csproj">
-      <Project>{5cd2ee50-a2e1-4740-aee4-87e9928f0230}</Project>
-      <Name>SqlBulkTools</Name>
+    <ProjectReference Include="..\SqlBulkToolsMTX\SqlBulkToolsMTX.csproj">
+      <Project>{0bcee35c-6701-4139-a146-a0ccdde076ea}</Project>
+      <Name>SqlBulkToolsMTX</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
