@@ -76,11 +76,12 @@ namespace SqlBulkTools
 
 
 
-        void ITransaction.CommitTransaction(string connectionName, SqlCredential credentials, SqlConnection connection)
+        int ITransaction.CommitTransaction(string connectionName, SqlCredential credentials, SqlConnection connection)
         {
+            var rowsAffected = 0;
             if (!_list.Any())
             {
-                return;
+                return rowsAffected;
             }
 
             if (_disableAllIndexes && (_disableIndexList != null && _disableIndexList.Any()))
@@ -121,7 +122,7 @@ namespace SqlBulkTools
                                 command.CommandText = _helper.GetIndexManagementCmd(IndexOperation.Disable, _tableName, _disableIndexList, _disableAllIndexes);
                                 command.ExecuteNonQuery();
                             }
-
+                            bulkcopy.SqlRowsCopied += (s, e) => rowsAffected = (int)e.RowsCopied;
                             bulkcopy.WriteToServer(dt);
 
                             if (_disableAllIndexes || (_disableIndexList != null && _disableIndexList.Any()))
@@ -148,6 +149,7 @@ namespace SqlBulkTools
                     }
                 }
             }
+            return rowsAffected;
         }
 
         /// <summary>
@@ -157,11 +159,12 @@ namespace SqlBulkTools
         /// <param name="credentials"></param>
         /// <param name="connection"></param>
         /// <returns></returns>
-        async Task ITransaction.CommitTransactionAsync(string connectionName, SqlCredential credentials, SqlConnection connection)
+        async Task<int> ITransaction.CommitTransactionAsync(string connectionName, SqlCredential credentials, SqlConnection connection)
         {
+            var rowsAffected = 0;
             if (!_list.Any())
             {
-                return;
+                return rowsAffected;
             }
 
             if (_disableAllIndexes && (_disableIndexList != null && _disableIndexList.Any()))
@@ -204,6 +207,7 @@ namespace SqlBulkTools
                             }
 
                             await bulkcopy.WriteToServerAsync(dt);
+                            bulkcopy.SqlRowsCopied += (s, e) => rowsAffected = (int)e.RowsCopied;
 
                             if (_disableAllIndexes || (_disableIndexList != null && _disableIndexList.Any()))
                             {
@@ -228,6 +232,7 @@ namespace SqlBulkTools
                     }
                 }
             }
+            return rowsAffected;
         }
     }
 }

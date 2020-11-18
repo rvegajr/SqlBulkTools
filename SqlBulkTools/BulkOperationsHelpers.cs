@@ -306,12 +306,6 @@ namespace SqlBulkTools
                 return conn;
             }
 
-            if (connectionName != null)
-            {
-                conn = new SqlConnection(ConfigurationManager
-                    .ConnectionStrings[connectionName].ConnectionString, credentials);
-                return conn;
-            }
 
             throw new InvalidOperationException("Could not create SQL Connection");
         }
@@ -450,6 +444,14 @@ namespace SqlBulkTools
             {
                 var type2 = props[i].GetType();
                 if (props[i].PropertyType.IsValueType || props[i].PropertyType == typeof(string))
+                {
+                    columns.Add(props[i].Name);
+                } 
+                else if (props[i].PropertyType.Name.Equals("Geometry"))
+                {
+                    columns.Add(props[i].Name);
+                }
+                else if (props[i].PropertyType.Name.Equals("Geography"))
                 {
                     columns.Add(props[i].Name);
                 }

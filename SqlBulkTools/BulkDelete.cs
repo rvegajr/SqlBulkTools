@@ -92,11 +92,12 @@ namespace SqlBulkTools
             return this;
         }
 
-        void ITransaction.CommitTransaction(string connectionName, SqlCredential credentials, SqlConnection connection)
+        int ITransaction.CommitTransaction(string connectionName, SqlCredential credentials, SqlConnection connection)
         {
+            var rowsAffected = 0;
             if (!_list.Any())
             {
-                return;
+                return rowsAffected;
             }
 
             if (_disableAllIndexes && (_disableIndexList != null && _disableIndexList.Any()))
@@ -150,7 +151,7 @@ namespace SqlBulkTools
                                       "WHEN MATCHED THEN DELETE; " +
                                       "DROP TABLE #TmpTable;";
                         command.CommandText = comm;
-                        command.ExecuteNonQuery();
+                        rowsAffected =  command.ExecuteNonQuery();
 
                         if (_disableIndexList != null && _disableIndexList.Any())
                         {
@@ -172,6 +173,7 @@ namespace SqlBulkTools
                     }
                 }
             }
+            return rowsAffected;
         }
 
         /// <summary>
@@ -182,11 +184,12 @@ namespace SqlBulkTools
         /// <param name="connection"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        async Task ITransaction.CommitTransactionAsync(string connectionName, SqlCredential credentials, SqlConnection connection)
+        async Task<int> ITransaction.CommitTransactionAsync(string connectionName, SqlCredential credentials, SqlConnection connection)
         {
+            var rowsAffected = 0;
             if (!_list.Any())
             {
-                return;
+                return rowsAffected;
             }
 
             if (_disableAllIndexes && (_disableIndexList != null && _disableIndexList.Any()))
@@ -240,7 +243,7 @@ namespace SqlBulkTools
                                       "WHEN MATCHED THEN DELETE; " +
                                       "DROP TABLE #TmpTable;";
                         command.CommandText = comm;
-                        await command.ExecuteNonQueryAsync();
+                        rowsAffected = await command.ExecuteNonQueryAsync();
 
                         if (_disableIndexList != null && _disableIndexList.Any())
                         {
@@ -262,6 +265,7 @@ namespace SqlBulkTools
                     }
                 }
             }
+            return rowsAffected;
         }
     }
 }
