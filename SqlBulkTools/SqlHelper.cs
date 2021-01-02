@@ -55,10 +55,10 @@ namespace SqlBulkTools
             for (int i = 0; i < r.FieldCount; i++)
             {
                 var name = r.GetName(i);
-                if (r.GetName(i).Equals("Shape"))
-                {
-                    var k = 10;
-                }
+                //if (r.GetName(i).Equals("Shape"))
+                //{
+                //    var k = 10;
+                //}
                 if (indexMembers.ContainsKey(name))
                 {
                     var PropertyType = indexMembers[name].Type;

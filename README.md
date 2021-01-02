@@ -14,10 +14,10 @@ Note that I wanted to diffentiate this Nuget package with the original SqlBulkTo
 -----------------------------
 
 ###Installation
-EzSqlBulkTools is available from npm.
+EzSqlBulkTools is available from nuget.
 
 ```
-npm install EzSqlBulkTools
+Install-Package EzSqlBulkTools
 ```
 
 ```c#
