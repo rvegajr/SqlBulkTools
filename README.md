@@ -1,12 +1,25 @@
 <img src="http://gregnz.com/images/SqlBulkTools/icon-large.png" alt="SqlBulkTools"> 
 #SqlBulkTools
 -----------------------------
-Welcome to Version 2! High-performance C# Bulk operations for SQL Server (starting from 2008) and Azure SQL Database. Supports Bulk Insert, Update, Delete & Merge. Uses SQLBulkCopy under the hood. Please leave a Github star if you find this project useful. 
+
+High-performance C# Bulk operations for SQL Server (starting from 2008) and Azure SQL Database. Supports Bulk Insert, Update, Delete & Merge. Uses SQLBulkCopy under the hood. Please leave a Github star if you find this project useful. 
+
+This is a clone from olegil/SqlBulkTools.  I had some issues with compatable nuget packages with this being .net standard which I could only solve by mutli-targeting.  I also added the ability to send gemoetry and geography fields through bulk actions.
+ 
+Note that I wanted to diffentiate this Nuget package with the original SqlBulkTools.  This one if called "EzSqlBulkTools" 
 
 ##Examples
 
 ####Getting started
 -----------------------------
+
+###Installation
+EzSqlBulkTools is available from npm.
+
+```
+npm install EzSqlBulkTools
+```
+
 ```c#
 using SqlBulkTools;
 

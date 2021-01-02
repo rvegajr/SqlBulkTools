@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+using AutoFixture;
 using SqlBulkTools.IntegrationTests.Model;
 
 namespace SqlBulkTools.IntegrationTests
